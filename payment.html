@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+    <header>
+        <h1>Payment Page</h1>
+    </header>
+    <main class="payment-section">
+        <h2>Your Cart</h2>
+        <ul id="cart-items"></ul>
+        <form>
+            <label for="card-number">Card Number:</label>
+            <input type="text" id="card-number" placeholder="1234 5678 9123 4567" required>
+            <label for="expiry">Expiry Date:</label>
+            <input type="text" id="expiry" placeholder="MM/YY" required>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" placeholder="123" required>
+            <button type="submit">Pay Now</button>
+        </form>
+    </main>
+    <script>
+        // Retrieve cart data
+        const cartData = JSON.parse(localStorage.getItem('cart'));
+        const cartItemsList = document.getElementById('cart-items');
+        cartData.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${item.name} - ${item.price}`;
+            cartItemsList.appendChild(listItem);
+        });
+    </script>
+</body>
+</html>

@@ -3,34 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment</title>
+    <title>Checkout | HiTech Interials</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="payment.css">
 </head>
 <body>
-    <header>
-        <h1>Payment Page</h1>
+    <header class="checkout-header">
+        <a href="index.html" class="checkout-logo"><img src="img/logo.png" alt="HiTech Interials home"></a>
+        <div class="checkout-progress"><span class="complete"><i class="fa fa-check" aria-hidden="true"></i> Cart</span><i class="fa fa-angle-right" aria-hidden="true"></i><span class="current">Payment</span><i class="fa fa-angle-right" aria-hidden="true"></i><span>Confirmation</span></div>
+        <a class="back-link" href="cart.html"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Back to cart</a>
     </header>
-    <main class="payment-section">
-        <h2>Your Cart</h2>
-        <ul id="cart-items"></ul>
-        <form>
-            <label for="card-number">Card Number:</label>
-            <input type="text" id="card-number" placeholder="1234 5678 9123 4567" required>
-            <label for="expiry">Expiry Date:</label>
-            <input type="text" id="expiry" placeholder="MM/YY" required>
-            <label for="cvv">CVV:</label>
-            <input type="text" id="cvv" placeholder="123" required>
-            <button type="submit">Pay Now</button>
-        </form>
+
+    <main class="checkout-shell">
+        <div class="checkout-title"><p class="eyebrow">SECURE CHECKOUT</p><h1>Complete your order</h1><p>Your details are protected throughout checkout.</p></div>
+        <div id="checkout-view" class="checkout-grid">
+            <section class="payment-card">
+                <div class="card-title"><div><span class="step-number">01</span><h2>Payment details</h2></div><span class="accepted-cards"><i class="fa fa-cc-visa" aria-hidden="true"></i><i class="fa fa-cc-mastercard" aria-hidden="true"></i><i class="fa fa-lock" aria-hidden="true"></i></span></div>
+                <form id="payment-form">
+                    <label for="card-name">Name on card<input id="card-name" type="text" placeholder="Alex Johnson" required></label>
+                    <label for="card-number">Card number<input id="card-number" type="text" inputmode="numeric" maxlength="19" placeholder="1234 5678 9012 3456" required></label>
+                    <div class="form-row"><label for="expiry">Expiry date<input id="expiry" type="text" maxlength="5" placeholder="MM/YY" required></label><label for="cvv">Security code<input id="cvv" type="text" inputmode="numeric" maxlength="4" placeholder="123" required></label></div>
+                    <div class="billing-note"><i class="fa fa-shield" aria-hidden="true"></i><span>Your payment information is encrypted and never stored on this device.</span></div>
+                    <button class="pay-button" type="submit">Pay securely <i class="fa fa-lock" aria-hidden="true"></i></button>
+                </form>
+            </section>
+            <aside class="order-card"><div class="order-card-heading"><h2>Your order</h2><a href="cart.html">Edit</a></div><ul id="cart-items"></ul><div class="order-line"><span>Subtotal</span><strong id="subtotal">$0.00</strong></div><div class="order-line"><span>Shipping</span><strong>Free</strong></div><div class="order-total"><span>Total</span><strong id="total">$0.00</strong></div><p class="delivery-note"><i class="fa fa-truck" aria-hidden="true"></i> Expected delivery in 3-5 business days</p></aside>
+        </div>
+
+        <section id="confirmation" class="confirmation" hidden>
+            <div class="confirmation-icon"><i class="fa fa-check" aria-hidden="true"></i></div>
+            <p class="eyebrow">ORDER CONFIRMED</p><h1>Thank you for your order.</h1><p class="confirmation-copy">Your order has been placed successfully. We have sent the details to your email address.</p>
+            <div class="confirmation-number">Order number <strong id="order-number"></strong></div>
+            <div class="confirmation-actions"><a class="pay-button" href="shop.html">Continue shopping</a><a class="text-button" href="index.html">Return home</a></div>
+        </section>
     </main>
+
+    <footer><p>&copy; 2025 HiTech Interials</p><p><i class="fa fa-lock" aria-hidden="true"></i> Secure checkout</p></footer>
+
     <script>
-        // Retrieve cart data
-        const cartData = JSON.parse(localStorage.getItem('cart'));
-        const cartItemsList = document.getElementById('cart-items');
-        cartData.forEach(item => {
+        const cartItems = document.getElementById('cart-items');
+        const storedCart = JSON.parse(localStorage.getItem('cart') || '[]');
+        const fallbackItems = [{ name: 'Summer Cool T-Shirt', price: 78, quantity: 1 }, { name: 'Classic Casual Shirt', price: 129, quantity: 1 }];
+        const items = storedCart.length ? storedCart : fallbackItems;
+        let total = 0;
+        items.forEach(item => {
+            const quantity = Number(item.quantity) || 1;
+            const price = Number(String(item.price).replace(/[^0-9.]/g, '')) || 0;
+            const itemTotal = price * quantity;
+            total += itemTotal;
             const listItem = document.createElement('li');
-            listItem.textContent = `${item.name} - ${item.price}`;
-            cartItemsList.appendChild(listItem);
+            listItem.innerHTML = `<span>${item.name}<small>Qty ${quantity}</small></span><strong>$${itemTotal.toFixed(2)}</strong>`;
+            cartItems.appendChild(listItem);
+        });
+        document.getElementById('subtotal').textContent = `$${total.toFixed(2)}`;
+        document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+        document.getElementById('payment-form').addEventListener('submit', event => {
+            event.preventDefault();
+            document.getElementById('checkout-view').hidden = true;
+            document.getElementById('confirmation').hidden = false;
+            document.getElementById('order-number').textContent = `HT-${Date.now().toString().slice(-6)}`;
+            localStorage.removeItem('cart');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
 </body>

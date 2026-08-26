@@ -13,7 +13,7 @@
 <body>
 
     <section id="header">
-        <a href="#" class="logo"><img src="logo.png" alt=""></a>
+        <a href="index.html" class="logo"><img src="img/logo.png" alt="HiTech Interials home"></a>
 
         <div>
             <ul id="navbar">
@@ -416,7 +416,7 @@
 
     <footer class="section-p1">
         <div class="col">
-            <img class="logo" src="logo.png" alt="">
+            <img class="logo" src="img/logo.png" alt="HiTech Interials">
             <h4>Contact</h4>
             <p><strong>Address: </strong> Maharani Enclave, Hastsal </p>
             <p><strong>Phone: </strong>+91 ----------- </p>
@@ -465,6 +465,15 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        const productPages = ['sproduct.html', 's1product.html', 's2product.html', 's3product.html', 's4product.html', 's5product.html', 's6product.html'];
+        document.querySelectorAll('#products .pdct').forEach((product, index) => {
+            product.addEventListener('click', event => {
+                if (event.target.closest('.cart')) return;
+                window.location.href = productPages[index % productPages.length];
+            });
+        });
+    </script>
 </body>
 
 </html>

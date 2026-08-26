@@ -12,7 +12,7 @@
     <body>
 
         <section id = "header">
-            <a href="#" class ="logo"><img src="logo.png" alt=""></a>
+            <a href="index.html" class="logo"><img src="img/logo.png" alt="HiTech Interials home"></a>
         
             <div>
                 <ul id = "navbar">
@@ -30,3 +30,33 @@
                 <a href="cart.html"><i class="fa fa-shopping-bag"></i></a>
             </div>
         </section>
+
+        <section id="page-header" class="contact-header">
+            <h2>Get In Touch</h2>
+            <p>We are here to help with your HiTech experience.</p>
+        </section>
+
+        <main id="contact-page">
+            <section class="contact-intro section-p1">
+                <div><p class="eyebrow">CONTACT HITECH</p><h1>Let’s talk about your next favorite piece.</h1><p>Whether you have a question about an order, need help choosing a size, or simply want to say hello, send us a message. Our team will get back to you as soon as possible.</p></div>
+                <div class="contact-details"><div class="contact-detail"><i class="fa fa-map-marker" aria-hidden="true"></i><div><h3>Visit us</h3><p>Maharani Enclave, Hastsal<br>New Delhi, India</p></div></div><div class="contact-detail"><i class="fa fa-envelope-o" aria-hidden="true"></i><div><h3>Email us</h3><p>hitechinterials@gmail.com<br>We reply within 1-2 business days.</p></div></div><div class="contact-detail"><i class="fa fa-clock-o" aria-hidden="true"></i><div><h3>Opening hours</h3><p>Monday - Saturday<br>10:00 AM - 7:00 PM</p></div></div></div>
+            </section>
+
+            <section class="contact-form-section section-p1">
+                <div class="contact-form-copy"><p class="eyebrow">SEND A MESSAGE</p><h2>How can we help?</h2><p>Tell us a little about what you need and we will take it from there.</p></div>
+                <form class="contact-form" onsubmit="event.preventDefault(); document.getElementById('form-message').textContent = 'Thanks for reaching out. We will be in touch soon.';">
+                    <div class="form-row"><label for="name">Your name<input id="name" type="text" placeholder="Your name" required></label><label for="email">Email address<input id="email" type="email" placeholder="you@example.com" required></label></div>
+                    <label for="subject">Subject<input id="subject" type="text" placeholder="How can we help?"></label>
+                    <label for="message">Your message<textarea id="message" rows="6" placeholder="Write your message here..." required></textarea></label>
+                    <button class="about-button" type="submit">Send message <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button><p id="form-message" class="form-message" aria-live="polite"></p>
+                </form>
+            </section>
+        </main>
+
+        <section id="newsletter" class="section-p1 section-m1"><div class="newstext"><h4>Sign Up For Newsletter</h4><p>Get E-mails updates about our latest collection and <span>special offers</span>.</p></div><div class="form"><input type="email" placeholder="Your email address"><button class="normal" type="button">Sign Up</button></div></section>
+
+        <footer class="section-p1"><div class="col"><img class="logo" src="img/logo.png" alt="HiTech Interials"><h4>Contact</h4><p><strong>Address: </strong> Maharani Enclave, Hastsal</p><p><strong>Phone: </strong> +91 -----------</p><p><strong>E-mail: </strong> hitechinterials@gmail.com</p><div class="follow"><h4>Follow Us</h4><div class="icon"><i class="fa fa-facebook"></i><i class="fa fa-twitter"></i><i class="fa fa-instagram"></i><i class="fa fa-youtube-play"></i></div></div></div><div class="col"><h4>About</h4><a href="about.html">About us</a><a href="#">Delivery Info</a><a href="#">Privacy Policy</a><a href="#">Terms &amp; Condition</a><a href="contact.html">Contact us</a></div><div class="col"><h4>My Account</h4><a href="#">Sign In</a><a href="cart.html">View Cart</a><a href="#">My Wishlist</a><a href="#">Track My Order</a><a href="#">Help</a></div><div class="col install"><h4>Install App</h4><p>From App Store or Google Play</p><a href="#" class="play"><img src="img/play.png" alt="Google Play"></a><p>Secured Payment Gateway</p></div><div class="copyright"><p>2025 &copy; All rights reserved.</p></div></footer>
+
+        <script src="script.js"></script>
+    </body>
+</html>

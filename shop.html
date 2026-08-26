@@ -13,7 +13,7 @@
 <body>
 
     <section id="header">
-        <a href="#" class="logo"><img src="logo.png" alt=""></a>
+        <a href="index.html" class="logo"><img src="img/logo.png" alt="HiTech Interials home"></a>
 
         <div>
             <ul id="navbar">
@@ -41,6 +41,10 @@
     </section>
 
     <section id="products" class="section-p1">
+        <div class="shop-heading">
+            <div><p class="eyebrow">CURATED FOR EVERY DAY</p><h1>Find your next favorite</h1></div>
+            <p>Easy pieces, considered details, and modern comfort.</p>
+        </div>
         <div class="pdct-container">
             <div class="pdct" onclick="window.location.href='sproduct.html';">
                 <img src="https://i.pinimg.com/originals/d2/62/af/d262af46473f64ddaa3985655f8bacbe.jpg" alt="">
@@ -290,9 +294,9 @@
     </section>
 
     <section id="pagination" class="section-p1">
-        <a href="#">1</a>
-        <a href="#">2</a>
-        <a href="#"><i class="fa-solid fa-arrow-right"></i></a>
+        <button type="button" class="page-number active" data-page="1" aria-label="Page 1">1</button>
+        <button type="button" class="page-number" data-page="2" aria-label="Page 2">2</button>
+        <button type="button" id="next-page" aria-label="Next page"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
     </section>
 
     <section id="newsletter" class="section-p1 section-m1">
@@ -308,7 +312,7 @@
 
     <footer class="section-p1">
         <div class="col">
-            <img class="logo" src="logo.png" alt="">
+            <img class="logo" src="img/logo.png" alt="HiTech Interials">
             <h4>Contact</h4>
             <p><strong>Address: </strong> Maharani Enclave, Hastsal </p>
             <p><strong>Phone: </strong>+91 ----------- </p>
@@ -357,6 +361,37 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        const shopProductPages = ['sproduct.html', 's1product.html', 's2product.html', 's3product.html', 's4product.html', 's5product.html', 's6product.html'];
+        document.querySelectorAll('#products .pdct').forEach((product, index) => {
+            product.querySelector('.cart').closest('a').href = 'cart.html';
+            product.onclick = event => {
+                if (event.target.closest('.cart')) return;
+                window.location.href = shopProductPages[index % shopProductPages.length];
+            };
+        });
+
+        const shopProducts = [...document.querySelectorAll('#products .pdct')];
+        const pageButtons = [...document.querySelectorAll('.page-number')];
+        const nextPage = document.getElementById('next-page');
+        const productsPerPage = 8;
+        let currentPage = 1;
+
+        function showShopPage(page) {
+            const pageCount = Math.ceil(shopProducts.length / productsPerPage);
+            currentPage = Math.min(Math.max(page, 1), pageCount);
+            shopProducts.forEach((product, index) => {
+                product.hidden = index < (currentPage - 1) * productsPerPage || index >= currentPage * productsPerPage;
+            });
+            pageButtons.forEach(button => button.classList.toggle('active', Number(button.dataset.page) === currentPage));
+            nextPage.disabled = currentPage === pageCount;
+            nextPage.setAttribute('aria-disabled', String(nextPage.disabled));
+        }
+
+        pageButtons.forEach(button => button.addEventListener('click', () => showShopPage(Number(button.dataset.page))));
+        nextPage.addEventListener('click', () => showShopPage(currentPage + 1));
+        showShopPage(1);
+    </script>
 </body>
 
 </html>

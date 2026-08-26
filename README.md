@@ -8,8 +8,8 @@ A responsive fashion ecommerce storefront built with HTML, CSS, and vanilla Java
 
 The website is deployed with Netlify from this GitHub repository.
 
-- Live site: Add your Netlify URL here
-- Repository: Add your GitHub repository URL here
+- Live site: https://hitechinterials.netlify.app/
+- Repository: https://github.com/Logic-Voyager/hitech
 
 ## Features
 
